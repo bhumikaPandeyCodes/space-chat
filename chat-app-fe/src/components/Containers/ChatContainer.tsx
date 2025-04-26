@@ -7,10 +7,6 @@ type chat = {
   message: string,
 }
 
-type connectionType = {
-  username: string,
-  status: "connected" | "disconnected"
-}
 
 const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, room: string}) => {
   const [chatArray, setChatArray] = useState<chat[]>([])
