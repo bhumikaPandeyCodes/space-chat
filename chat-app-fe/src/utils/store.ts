@@ -1,4 +1,4 @@
-import { configureStore, createSlice,PayloadAction } from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 // Create a slice (reducers + actions)
 const requestType = createSlice({

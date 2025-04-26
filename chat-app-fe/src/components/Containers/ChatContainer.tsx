@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/magicui/dot-pattern";
 
 type chat = {
-  username: string,
-  message: string,
+  username?: string,
+  message?: string,
 }
 
 

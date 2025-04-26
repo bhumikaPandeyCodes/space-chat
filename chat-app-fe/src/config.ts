@@ -1,1 +1,1 @@
-export const BACKEND_URL = "ws://localhost:8080/"
+export const BACKEND_URL = process.env.VITE_BACKEND_URL || "wss://localhost:8080"

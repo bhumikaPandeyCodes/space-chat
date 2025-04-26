@@ -1,6 +1,6 @@
 import ChatContainer from '@/components/Containers/ChatContainer'
 import RoomContainer from '@/components/Containers/RoomContainer'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const Room = () => {
 

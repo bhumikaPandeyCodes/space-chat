@@ -1,11 +1,10 @@
 import { DotPattern } from "@/components/magicui/dot-pattern"
 import { cn } from "@/lib/utils"
-import React, { RefObject, SetStateAction, useEffect, useRef, useState } from "react"
+import React, { SetStateAction, useEffect, useRef, useState } from "react"
 import generateRandomRoom from "@/utils/roomcode"
 import { BACKEND_URL } from "@/config"
 import { useSelector  } from "react-redux"
-import { RootState } from "../../utils/store"
-import {  useDispatch } from "react-redux";
+import { RootState } from "../../utils/store.ts"
 
 interface RoomContainerType{
     setWs : React.Dispatch<SetStateAction<WebSocket | null>>,
@@ -20,7 +19,6 @@ const RoomContainer = ({setWs, setUsername, setRoom}: RoomContainerType) => {
   const request = useSelector((state:RootState) => state.request.value);
   const [error, setError] = useState<string | null>(null)
   const [copyText, setCopyText] = useState<"Copy" | "Copied!">("Copy")
-  const dispatch = useDispatch()
 
   useEffect(()=>{
 
