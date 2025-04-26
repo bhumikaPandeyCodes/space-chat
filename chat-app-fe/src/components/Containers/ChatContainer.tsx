@@ -1,11 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import  { useEffect, useRef, useState } from 'react'
 import { cn } from "@/lib/utils";
 import { DotPattern } from "@/components/magicui/dot-pattern";
-import {motion} from "motion/react"
 
 type chat = {
   username: string,
   message: string,
+}
+
+type connectionType = {
+  username: string,
+  status: "connected" | "disconnected"
 }
 
 const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, room: string}) => {
@@ -52,9 +56,9 @@ const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, r
       
         <div className='w-full md:w-[400px] h-full rounded-2xl bg-gradient-to-b from-primary-blue to-black py-2 px-4 flex flex-col  items-center shadow-sm shadow-gray-4'> 
             <h1 className='text-white font-secondary font-semibold text-2xl'>Room - <span className='font-primary font-medium'>{room}</span></h1>
-            {chatArray.length>0 && 
+            
               <div className={`w-full h-5/6 px-5 rounded-[40px] text-white flex flex-col gap-4 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-dark-blue hover:scrollbar-thumb-dark-blue scrollbar-track-primary-blue  overflow-y-auto `}>
-              {
+              {chatArray.length>1 ?
                 chatArray.map((chat,i)=>{
                   return (username != chat.username?<div key={i} className='flex flex-col gap-[2px] shadow-xs shadow-gray-5 w-fit px-2 py-1 rounded-lg rounded-bl-none bg-dark-blue z-20'>
                     <span className='text-xs  text-gray-4'>{chat.username}</span>
@@ -64,10 +68,9 @@ const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, r
                     <span className='text-xs  text-gray-4'>You</span>
                     <span className=''>{chat.message} </span>    
                     </div>)
-                })
+                }): ""
               }
-            </div>
-              }
+            </div> 
             <div className='flex gap-4 font-secondary text-lg'>
               <input className='px-5 py-1 border-2 border-gray-2 text-white rounded-sm outline-none' onChange={()=>setError("")} placeholder='Send message' ref={messageRef}/>
               <button className='px-5 py-1  border-[1.6px] border-gray-2 text-white rounded-4xl cursor-pointer hover:bg-gray-2 hover:text-primary-blue hover:scale-95 transition-all ease-in-out' 
