@@ -26,12 +26,19 @@ const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, r
     }
   }
 
+  function isMessage(data: any){
+    return (
+      data && typeof data =="object" && typeof data.username == "string" && typeof data.message == "string"
+    )
+  }
+
   useEffect(()=>{
     ws.onmessage = (ev)=>{
-      console.log(ev.data)
-      const data: chat = JSON.parse(ev.data)
-      if(data)
+      const data = JSON.parse(ev.data)
+      console.log(typeof data)
+    if(isMessage(data)){
       setChatArray((prev) => [...prev, data])
+    }
     }
   },[chatArray])
 
@@ -54,7 +61,7 @@ const ChatContainer = ({ws, username, room}: {ws: WebSocket, username: string, r
             <h1 className='text-white font-secondary font-semibold text-2xl'>Room - <span className='font-primary font-medium'>{room}</span></h1>
             
               <div className={`w-full h-5/6 px-5 rounded-[40px] text-white flex flex-col gap-4 scrollbar-thin scrollbar-thumb-rounded-full scrollbar-thumb-dark-blue hover:scrollbar-thumb-dark-blue scrollbar-track-primary-blue  overflow-y-auto `}>
-              {chatArray.length>1 ?
+              {chatArray.length>0 ?
                 chatArray.map((chat,i)=>{
                   return (username != chat.username?<div key={i} className='flex flex-col gap-[2px] shadow-xs shadow-gray-5 w-fit px-2 py-1 rounded-lg rounded-bl-none bg-dark-blue z-20'>
                     <span className='text-xs  text-gray-4'>{chat.username}</span>
